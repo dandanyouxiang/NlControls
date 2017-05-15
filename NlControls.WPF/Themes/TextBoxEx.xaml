@@ -1,0 +1,78 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:common="clr-namespace:NlControls.WPF.Common"
+                    xmlns:local="clr-namespace:NlControls.WPF.Controls"
+                    xmlns:sys="clr-namespace:System;assembly=mscorlib"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <sys:Double x:Key="DisableOpacity">0.5</sys:Double>
+    <sys:Double x:Key="ReadonlyOpacity">0.88</sys:Double>
+    <sys:Double x:Key="WatermarkOpacity">0.4</sys:Double>
+    <SolidColorBrush x:Key="WatermarkColor" Color="#a4bcc9"/>
+    
+    <!--TextBox默认样式-->
+    <Style TargetType="{x:Type local:TextBoxEx}">
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="SnapsToDevicePixels" Value="True" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="BorderBrush" Value="Black" />
+        <Setter Property="common:ControlAttachProperty.FocusBorderBrush" Value="Black" />
+        <Setter Property="common:ControlAttachProperty.MouseOverBorderBrush" Value="Black" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type TextBox}">
+                    <Grid x:Name="PART_Root">
+                        <Border x:Name="Bg" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                                CornerRadius="{TemplateBinding common:ControlAttachProperty.CornerRadius}"
+                                BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" />
+                        <Grid x:Name="PART_InnerGrid">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition  Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition  Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <!--Label区域-->
+                            <ContentControl x:Name="Label" Margin="1" Template="{TemplateBinding common:ControlAttachProperty.LabelTemplate}"
+                                            Content="{TemplateBinding common:ControlAttachProperty.Label}"/>
+                            <!--内容区域-->
+                            <ScrollViewer x:Name="PART_ContentHost" BorderThickness="0" Grid.Column="1" IsTabStop="False" Margin="10,0,0,0"
+                                          VerticalAlignment="Stretch" Background="{x:Null}" />
+                            <!--水印-->
+                            <TextBlock x:Name="Message"  Padding="{TemplateBinding Padding}" Visibility="Collapsed"
+                                       Text="{TemplateBinding common:ControlAttachProperty.Watermark}" Grid.Column="1"
+                                       Foreground="{StaticResource WatermarkColor}" IsHitTestVisible="False" Opacity="0.8"
+                                       HorizontalAlignment="Left" Margin="10,0,0,0"
+                                       VerticalAlignment="Center"  />
+                            <!--附加内容区域-->
+                            <Border x:Name="PART_AttachContent" Grid.Column="2" Margin="2" VerticalAlignment="Center" HorizontalAlignment="Center" >
+                                <ContentControl VerticalAlignment="Center" VerticalContentAlignment="Center" Template="{TemplateBinding common:ControlAttachProperty.AttachContent}" />
+                            </Border>
+                        </Grid>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <!--显示水印-->
+                        <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self}, Path=Text}" Value="">
+                            <Setter TargetName="Message" Property="Visibility" Value="Visible" />
+                        </DataTrigger>
+
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="BorderBrush" Value="{Binding Path=(common:ControlAttachProperty.MouseOverBorderBrush),RelativeSource={RelativeSource Self}}"/>
+                        </Trigger>
+                        <Trigger Property="IsFocused" Value="True">
+                            <Setter  Property="BorderBrush" Value="{Binding Path=(common:ControlAttachProperty.FocusBorderBrush),RelativeSource={RelativeSource Self}}"/>
+                        </Trigger>
+                        <!--不可用-->
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter TargetName="PART_Root" Property="Opacity" Value="{StaticResource DisableOpacity}" />
+                        </Trigger>
+                        <!--只读时，禁用PART_AttachContent-->
+                        <Trigger Property="IsReadOnly" Value="True">
+                            <Setter TargetName="PART_AttachContent" Property="IsEnabled" Value="False" />
+                            <Setter TargetName="Bg" Property="Opacity" Value="{StaticResource ReadonlyOpacity}" />
+                            <Setter TargetName="PART_ContentHost" Property="Opacity" Value="{StaticResource ReadonlyOpacity}" />
+                            <Setter TargetName="Label" Property="Opacity" Value="{StaticResource ReadonlyOpacity}" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+</ResourceDictionary>

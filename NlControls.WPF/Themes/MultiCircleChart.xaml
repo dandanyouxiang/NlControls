@@ -1,0 +1,153 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:NlControls.WPF.Controls"
+                    xmlns:converter="clr-namespace:NlControls.WPF.Converters.MultiCircleChart">
+
+    <converter:WidthToFontSizeConverter x:Key="WidthToFontSizeConverter"/>
+    <converter:BrushToColorConverter x:Key="BrushToColorConverter"/>
+    <Storyboard x:Key="ItemOnLoaded">
+        <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)" 
+                                       Storyboard.TargetName="gridSwatch">
+            <EasingDoubleKeyFrame KeyTime="0" Value="0.3"/>
+            <EasingDoubleKeyFrame KeyTime="0:0:0.8" Value="1">
+                <EasingDoubleKeyFrame.EasingFunction>
+                    <BounceEase EasingMode="EaseOut"/>
+                </EasingDoubleKeyFrame.EasingFunction>
+            </EasingDoubleKeyFrame>
+        </DoubleAnimationUsingKeyFrames>
+        <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)" 
+                                       Storyboard.TargetName="gridSwatch">
+            <EasingDoubleKeyFrame KeyTime="0" Value="0.3"/>
+            <EasingDoubleKeyFrame KeyTime="0:0:0.8" Value="1">
+                <EasingDoubleKeyFrame.EasingFunction>
+                    <BounceEase EasingMode="EaseOut"/>
+                </EasingDoubleKeyFrame.EasingFunction>
+            </EasingDoubleKeyFrame>
+        </DoubleAnimationUsingKeyFrames>
+    </Storyboard>
+    <Storyboard x:Key="ItemOnMouseEnter">
+        <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[2].(RotateTransform.Angle)" 
+                                       Storyboard.TargetName="gridSwatch">
+            <EasingDoubleKeyFrame KeyTime="0" Value="-40"/>
+            <EasingDoubleKeyFrame KeyTime="0:0:0.6" Value="40"/>
+            <EasingDoubleKeyFrame KeyTime="0:0:0.8" Value="0"/>
+        </DoubleAnimationUsingKeyFrames>
+        <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)"
+                                       Storyboard.TargetName="gridSwatch">
+            <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="1"/>
+            <EasingDoubleKeyFrame KeyTime="0:0:0.4" Value="1.1"/>
+        </DoubleAnimationUsingKeyFrames>
+        <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)" 
+                                       Storyboard.TargetName="gridSwatch">
+            <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="1"/>
+            <EasingDoubleKeyFrame KeyTime="0:0:0.4" Value="1.1"/>
+        </DoubleAnimationUsingKeyFrames>
+        <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)" 
+                                       Storyboard.TargetName="gridSwatch">
+            <EasingDoubleKeyFrame KeyTime="0" Value="0.9"/>
+            <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="1"/>
+        </DoubleAnimationUsingKeyFrames>
+        <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)" 
+                                       Storyboard.TargetName="gridSwatch">
+            <EasingDoubleKeyFrame KeyTime="0" Value="0.9"/>
+            <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="1"/>
+        </DoubleAnimationUsingKeyFrames>
+    </Storyboard>
+    <Storyboard x:Key="ItemOnMouseLeave">
+        <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)"
+                                       Storyboard.TargetName="gridSwatch">
+            <EasingDoubleKeyFrame KeyTime="0" Value="1"/>
+            <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="0.7"/>
+            <EasingDoubleKeyFrame KeyTime="0:0:0.4" Value="1"/>
+        </DoubleAnimationUsingKeyFrames>
+        <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)" 
+                                       Storyboard.TargetName="gridSwatch">
+            <EasingDoubleKeyFrame KeyTime="0" Value="1"/>
+            <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="0.7"/>
+            <EasingDoubleKeyFrame KeyTime="0:0:0.4" Value="1"/>
+        </DoubleAnimationUsingKeyFrames>
+    </Storyboard>
+    <Style x:Key="circleItem"  TargetType="{x:Type ListBoxItem}">
+        <Setter Property="FocusVisualStyle"
+					Value="{x:Null}" />
+        <Setter Property="Tag" Value="{Binding RelativeSource={RelativeSource AncestorType=local:ListCirclePanel,Mode=FindAncestor},Path=SumValue}"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type ListBoxItem}">
+                    <Grid x:Name="gridSwatch" RenderTransformOrigin="0.5,0.5" >
+                        <Grid.RenderTransform>
+                            <TransformGroup>
+                                <ScaleTransform/>
+                                <SkewTransform/>
+                                <RotateTransform/>
+                                <TranslateTransform/>
+                            </TransformGroup>
+                        </Grid.RenderTransform>
+                        <Ellipse x:Name="ell" 
+                                     Fill="{Binding RelativeSource={RelativeSource AncestorType=local:MultiCircleChart,Mode=FindAncestor},Path=CircleBrush}">
+                            <Ellipse.Effect>
+                                <DropShadowEffect ShadowDepth="0" 
+                                                      Color="{Binding RelativeSource={RelativeSource AncestorType=local:MultiCircleChart,Mode=FindAncestor},Path=CircleBrush,Converter={StaticResource BrushToColorConverter}}"
+                                                      Opacity="0.65"
+                                                      BlurRadius="40"/>
+                            </Ellipse.Effect>
+                        </Ellipse>
+                        <ContentPresenter TextElement.FontSize="{Binding ElementName=ell,Path=ActualHeight,Converter={StaticResource WidthToFontSizeConverter},ValidatesOnExceptions=True}"
+                                          HorizontalAlignment="Center" 
+                                          VerticalAlignment="Center" 
+                                          MaxHeight="{Binding ElementName=ell,Path=ActualHeight}" 
+                                          MaxWidth="{Binding ElementName=ell,Path=ActualWidth}"/>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <EventTrigger RoutedEvent="FrameworkElement.Loaded" SourceName="gridSwatch">
+                            <BeginStoryboard Storyboard="{StaticResource ItemOnLoaded}"/>
+                        </EventTrigger>
+                        <EventTrigger RoutedEvent="Mouse.MouseEnter" SourceName="gridSwatch">
+                            <BeginStoryboard x:Name="OnMouseEnter1_BeginStoryboard"
+                                             Storyboard="{StaticResource ItemOnMouseEnter}"/>
+                        </EventTrigger>
+                        <EventTrigger RoutedEvent="Mouse.MouseLeave" SourceName="gridSwatch">
+                            <BeginStoryboard x:Name="OnMouseLeave1_BeginStoryboard"
+                                             Storyboard="{StaticResource ItemOnMouseLeave}"/>
+                        </EventTrigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+
+    </Style>
+    <Style TargetType="local:MultiCircleChart" >
+        <Setter Property="CircleBrush" Value="AliceBlue"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="local:MultiCircleChart">
+                    <Grid>
+                        
+                        <ListBox x:Name="PART_list"  Background="{TemplateBinding Background}"
+                             ItemContainerStyle="{StaticResource circleItem }"
+                             BorderBrush="{TemplateBinding BorderBrush}"
+                             BorderThickness="{TemplateBinding BorderThickness}"
+                             Foreground="{TemplateBinding Foreground}"
+                             ItemTemplate="{TemplateBinding ItemTemplate}"
+                             >
+                            <ListBox.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <local:ListCirclePanel x:Name="circlPanel"  
+                                                       DataContext="{Binding ElementName=PART_list,Path=ItemsSource}"
+                                                      ValueMemberPath="{Binding RelativeSource={RelativeSource AncestorType=local:MultiCircleChart,Mode=FindAncestor},Path=ValueMemberPath}"
+                                                       ItemsPlacePoints="{Binding RelativeSource={RelativeSource AncestorType=local:MultiCircleChart,Mode=FindAncestor},Path=ItemsPlacePoints}"
+                                                      />
+                                </ItemsPanelTemplate>
+                            </ListBox.ItemsPanel>
+                        </ListBox>
+                        <ContentPresenter x:Name="PART_ErrorContent"
+                                          HorizontalAlignment="Center"
+                                          VerticalAlignment="Center"
+                                          Content="{TemplateBinding ErrorTip}" 
+                                          IsHitTestVisible="False"/>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+</ResourceDictionary>

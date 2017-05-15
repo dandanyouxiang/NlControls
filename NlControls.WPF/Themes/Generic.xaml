@@ -1,0 +1,23 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="clr-namespace:NlControls.WPF.Controls">
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="pack://application:,,,/BigScreenControls.WPF;component/Themes/ProcessCircleBar.xaml"/>
+        <ResourceDictionary Source="pack://application:,,,/BigScreenControls.WPF;component/Themes/RatingControl.xaml"/>
+        <ResourceDictionary Source="pack://application:,,,/BigScreenControls.WPF;component/Themes/FlipPanel.xaml"/>
+        <ResourceDictionary Source="pack://application:,,,/BigScreenControls.WPF;component/Themes/TextBoxEx.xaml"/>
+        <ResourceDictionary Source="pack://application:,,,/BigScreenControls.WPF;component/Themes/AutoCompleteBox.xaml"/>
+        <ResourceDictionary Source="pack://application:,,,/BigScreenControls.WPF;component/Themes/FButton.xaml"/>
+        <ResourceDictionary Source="pack://application:,,,/BigScreenControls.WPF;component/Themes/MultiCircleChart.xaml"/>
+        <ResourceDictionary Source="pack://application:,,,/BigScreenControls.WPF;component/Themes/FlipViewEX.xaml"/>
+        <ResourceDictionary Source="pack://application:,,,/BigScreenControls.WPF;component/Themes/Loading.xaml"/>
+        <ResourceDictionary Source="pack://application:,,,/BigScreenControls.WPF;component/Themes/ToggleSwitch.xaml"/>
+        <ResourceDictionary Source="pack://application:,,,/BigScreenControls.WPF;component/Themes/SliderEx.xaml"></ResourceDictionary>
+        <ResourceDictionary Source="pack://application:,,,/BigScreenControls.WPF;component/Themes/ComboBoxEx.xaml"/>
+        <ResourceDictionary Source="pack://application:,,,/BigScreenControls.WPF;component/Themes/ResizeChrome.xaml"/>
+        <ResourceDictionary Source="pack://application:,,,/BigScreenControls.WPF;component/Themes/LocationChrome.xaml"/>
+        <ResourceDictionary Source="pack://application:,,,/BigScreenControls.WPF;component/Themes/MoveThumb.xaml"/>
+        <ResourceDictionary Source="pack://application:,,,/BigScreenControls.WPF;component/Themes/NewsFlowList.xaml"/>
+    </ResourceDictionary.MergedDictionaries>    
+</ResourceDictionary>

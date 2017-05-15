@@ -1,0 +1,77 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:NlControls.WPF.Controls"
+                    xmlns:StarRatingControl="clr-namespace:NlControls.WPF.Converters.StarRatingControl">
+    <StarRatingControl:GradientStopOffSetConverter x:Key="GradientStopOffSetConverter"/>
+    <ControlTemplate x:Key="StarRating" TargetType="{x:Type local:RatingControl}">
+        <Grid>
+            <Path x:Name="PART_STARS" Data="M139.75,0.5 L144.29406,15.206054 L159,15.205692 L147.10244,24.294172 L151.64716,39.000002 L139.75,29.910937 L127.85285,39.000002 L132.39756,24.294172 L120.5,15.205692 L135.20594,15.206054 z M179.75,0.5 L184.29406,15.206054 L199,15.205692 L187.10244,24.294172 L191.64716,39.000002 L179.75,29.910937 L167.85285,39.000002 L172.39756,24.294172 L160.5,15.205692 L175.20594,15.206054 z M219.75,0.5 L224.29406,15.206054 L239,15.205692 L227.10244,24.294172 L231.64716,39.000002 L219.75,29.910937 L207.85285,39.000002 L212.39756,24.294172 L200.5,15.205692 L215.20594,15.206054 z M259.75,0.5 L264.29406,15.206054 L279,15.205692 L267.10244,24.294172 L271.64716,39.000002 L259.75,29.910937 L247.85285,39.000002 L252.39756,24.294172 L240.5,15.205692 L255.20594,15.206054 z M299.75,0.5 L304.29406,15.206054 L319,15.205692 L307.10244,24.294172 L311.64716,39.000002 L299.75,29.910937 L287.85285,39.000002 L292.39756,24.294172 L280.5,15.205692 L295.20594,15.206054 z M339.75,0.5 L344.29406,15.206054 L359,15.205692 L347.10244,24.294172 L351.64716,39.000002 L339.75,29.910937 L327.85285,39.000002 L332.39756,24.294172 L320.5,15.205692 L335.20594,15.206054 z M379.75,0.5 L384.29406,15.206054 L399,15.205692 L387.10244,24.294172 L391.64716,39.000002 L379.75,29.910937 L367.85285,39.000002 L372.39756,24.294172 L360.5,15.205692 L375.20594,15.206054 z M99.750001,0.5 L104.29406,15.206054 L119,15.205692 L107.10244,24.294172 L111.64716,39.000002 L99.750001,29.910937 L87.852846,39.000002 L92.397559,24.294172 L80.5,15.205692 L95.205942,15.206054 z M59.750001,0.5 L64.29406,15.206054 L79.000001,15.205692 L67.102442,24.294172 L71.647155,39.000002 L59.750001,29.910937 L47.852846,39.000002 L52.397559,24.294172 L40.5,15.205692 L55.205942,15.206054 z M19.750001,0.5 L24.29406,15.206054 L39.000001,15.205692 L27.102442,24.294172 L31.647155,39.000002 L19.750001,29.910937 L7.852846,39.000002 L12.397559,24.294172 L0.50000002,15.205692 L15.205942,15.206054 z"   Stretch="Uniform" Stroke="Transparent"  StrokeThickness="0">
+                <Path.Fill>
+                    <LinearGradientBrush EndPoint="1,0" StartPoint="0,0">
+                        <GradientStop Color="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=StarForeground}" >
+                            <GradientStop.Offset>
+                                <MultiBinding Converter="{StaticResource GradientStopOffSetConverter}">
+                                    <Binding   RelativeSource="{RelativeSource TemplatedParent}" Path="Value" />
+                                    <Binding RelativeSource="{RelativeSource TemplatedParent}" Path="Minimum" />
+                                    <Binding RelativeSource="{RelativeSource TemplatedParent}" Path="Maximum" />
+                                </MultiBinding>
+                            </GradientStop.Offset>
+
+                        </GradientStop>
+                        <GradientStop Color="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=StarBackground}">
+                            <GradientStop.Offset>
+                                <MultiBinding Converter="{StaticResource GradientStopOffSetConverter}">
+                                    <Binding   RelativeSource="{RelativeSource TemplatedParent}" Path="Value" />
+                                    <Binding RelativeSource="{RelativeSource TemplatedParent}" Path="Minimum" />
+                                    <Binding RelativeSource="{RelativeSource TemplatedParent}" Path="Maximum" />
+                                </MultiBinding>
+                            </GradientStop.Offset>
+                        </GradientStop>
+
+                    </LinearGradientBrush>
+                </Path.Fill>
+            </Path>
+        </Grid>
+    </ControlTemplate>
+    <ControlTemplate x:Key="RectRating" TargetType="{x:Type local:RatingControl}">
+        <Path x:Name="PART_STARS" Data="M320,0 L339.901,0 L339.901,79.667 L320,79.667 z M359.901,0 L379.802,0 L379.802,79.667 L359.901,79.667 z M400,0 L419.901,0 L419.901,79.667 L400,79.667 z M439.901,0 L459.802,0 L459.802,79.667 L439.901,79.667 z M160.099,0 L180,0 L180,79.667 L160.099,79.667 z M200,0 L219.901,0 L219.901,79.667 L200,79.667 z M240.099,0 L260,0 L260,79.667 L240.099,79.667 z M280,0 L299.901,0 L299.901,79.667 L280,79.667 z M639.802,0 L659.703,0 L659.703,79.667 L639.802,79.667 z M679.703,0 L699.604,0 L699.604,79.667 L679.703,79.667 z M719.802,0 L739.703,0 L739.703,79.667 L719.802,79.667 z M759.703,0 L779.604,0 L779.604,79.667 L759.703,79.667 z M479.901,0 L499.802,0 L499.802,79.667 L479.901,79.667 z M519.802,0 L539.703,0 L539.703,79.667 L519.802,79.667 z M559.901,0 L579.802,0 L579.802,79.667 L559.901,79.667 z M599.802,0 L619.703,0 L619.703,79.667 L599.802,79.667 z M0,0 L19.901001,0 L19.901001,79.667 L0,79.667 z M39.901,0 L59.802001,0 L59.802001,79.667 L39.901,79.667 z M80,0 L99.901001,0 L99.901001,79.667 L80,79.667 z M119.901,0 L139.802,0 L139.802,79.667 L119.901,79.667 z"   Stretch="Uniform" Stroke="Transparent" StrokeThickness="0">
+            <Path.Fill>
+                <LinearGradientBrush EndPoint="1,0" StartPoint="0,0">
+                    <GradientStop Color="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=StarForeground}" >
+                        <GradientStop.Offset>
+                            <MultiBinding Converter="{StaticResource GradientStopOffSetConverter}">
+                                <Binding   RelativeSource="{RelativeSource TemplatedParent}" Path="Value" />
+                                <Binding RelativeSource="{RelativeSource TemplatedParent}" Path="Minimum" />
+                                <Binding RelativeSource="{RelativeSource TemplatedParent}" Path="Maximum" />
+                            </MultiBinding>
+                        </GradientStop.Offset>
+
+                    </GradientStop>
+                    <GradientStop Color="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=StarBackground}">
+                        <GradientStop.Offset>
+                            <MultiBinding Converter="{StaticResource GradientStopOffSetConverter}">
+                                <Binding   RelativeSource="{RelativeSource TemplatedParent}" Path="Value" />
+                                <Binding RelativeSource="{RelativeSource TemplatedParent}" Path="Minimum" />
+                                <Binding RelativeSource="{RelativeSource TemplatedParent}" Path="Maximum" />
+                            </MultiBinding>
+                        </GradientStop.Offset>
+                    </GradientStop>
+
+                </LinearGradientBrush>
+            </Path.Fill>
+        </Path>
+    </ControlTemplate>
+    <Style TargetType="{x:Type local:RatingControl}">
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="SnapsToDevicePixels" Value="True"/>
+        <Setter Property="Template" Value="{StaticResource StarRating}"></Setter>
+        <Style.Triggers>
+            <Trigger Property="ShapeType" Value="Stars">
+                <Setter Property="Template" Value="{StaticResource StarRating}"/>
+            </Trigger>
+            <Trigger Property="ShapeType" Value="Rects">
+                <Setter Property="Template" Value="{StaticResource RectRating}"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+</ResourceDictionary>

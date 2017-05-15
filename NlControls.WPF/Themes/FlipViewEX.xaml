@@ -1,0 +1,146 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+					xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+					 xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
+                    xmlns:Controls="clr-namespace:NlControls.WPF.Controls">
+
+    <Style x:Key="ControlButton" TargetType="RepeatButton">
+        <Setter Property="Background" Value="{DynamicResource WhiteBrush}" />
+        <Setter Property="Focusable" Value="True" />
+        <Setter Property="Foreground" Value="{DynamicResource TextBrush}" />
+        <Setter Property="Height" Value="30" />
+        <Setter Property="IsTabStop" Value="False" />
+        <Setter Property="Opacity" Value="0.4" />
+        <Setter Property="Panel.ZIndex" Value="5" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="RepeatButton">
+                    <Border Padding="1"
+                                    BorderBrush="{TemplateBinding Background}"
+                                    CornerRadius="4">
+                        <Grid Background="{TemplateBinding Background}">
+                            <Label HorizontalAlignment="Center"
+                                           VerticalAlignment="Center"
+                                           Foreground="{TemplateBinding Foreground}"
+                                           FontFamily="Marlett"
+                                           FontSize="17">
+                                <ContentPresenter ContentSource="Content" />
+                            </Label>
+                        </Grid>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Opacity" Value="1.0" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Width" Value="50" />
+    </Style>
+    
+    <Style TargetType="Controls:FlipViewEXItem">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Controls:FlipViewEXItem">
+                    <Grid Margin="10,0">
+                        <ContentPresenter />
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    
+    <ControlTemplate x:Key="FlipViewTemplate" TargetType="{x:Type Controls:FlipViewEX}">
+        <Grid x:Name="root"
+              HorizontalAlignment="Stretch"
+              VerticalAlignment="Stretch">
+            <Border Background="{TemplateBinding Background}"
+                    BorderBrush="{TemplateBinding BorderBrush}"
+                    BorderThickness="{TemplateBinding BorderThickness}">
+                <Border x:Name="PART_GlowBorder"
+                        BorderBrush="Transparent"
+                        BorderThickness="0">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <RepeatButton x:Name="PART_BackButton"
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Center"
+                                    Grid.Column="0"
+                                    Style="{StaticResource ControlButton}">
+                            <Path Canvas.Left="15.9063"
+                                      Canvas.Top="14.75"
+                                      Width="16"
+                                      Height="18"
+                                      Fill="Black"
+                                      Data="F1 M 22.6563,23.75L 24.6563,25.75L 31.9063,32.75L 25.4063,32.75L 15.9063,23.75L 25.4063,14.75L 31.9063,14.75L 24.6563,21.75L 22.6563,23.75 Z "
+                                      Stretch="Fill" />
+                        </RepeatButton>
+                        <RepeatButton x:Name="PART_ForwardButton"
+                                    Grid.Column="2"
+                                    HorizontalAlignment="Right"
+                                    VerticalAlignment="Center"
+                                    Style="{StaticResource ControlButton}">
+                            <Path Canvas.Left="15.9063"
+                                      Canvas.Top="14.75"
+                                      Width="16"
+                                      Height="18"
+                                      Fill="Black"
+                                      Data="F1 M 25.1563,23.75L 23.1563,21.75L 15.9063,14.75L 22.4063,14.75L 31.9063,23.75L 22.4063,32.75L 15.9063,32.75L 23.1563,25.75L 25.1563,23.75 Z "
+                                      Stretch="Fill" />
+                        </RepeatButton>
+                        <ScrollViewer x:Name="PART_Scroller" Grid.Column="1"  VerticalScrollBarVisibility="Disabled" HorizontalScrollBarVisibility="Hidden">
+                            <StackPanel Orientation="Horizontal"  IsItemsHost="True"  VerticalAlignment="Center">
+                                <i:Interaction.Behaviors>
+                                    <ei:FluidMoveBehavior AppliesTo="Children"/>
+                                </i:Interaction.Behaviors>
+							</StackPanel>
+                        </ScrollViewer>
+
+                    </Grid>
+                </Border>
+            </Border>
+        </Grid>
+        <ControlTemplate.Triggers>
+            <!--<MultiTrigger>
+                <MultiTrigger.Conditions>
+                    <Condition SourceName="root" Property="IsMouseOver" Value="True" />
+                    <Condition Property="MouseOverGlowEnabled" Value="True" />
+                </MultiTrigger.Conditions>
+
+                <MultiTrigger.Setters>
+                    <Setter TargetName="PART_GlowBorder" Property="BorderBrush" Value="Tran" />
+                </MultiTrigger.Setters>
+            </MultiTrigger>-->
+
+           
+        </ControlTemplate.Triggers>
+        <ControlTemplate.Resources>
+            <Storyboard x:Key="HideControlStoryboard">
+                <DoubleAnimation AccelerationRatio="1.0"
+                                 SpeedRatio="2.5"
+                                 Storyboard.TargetProperty="Opacity"
+                                 To="0.0" />
+            </Storyboard>
+            <Storyboard x:Key="ShowControlStoryboard">
+                <DoubleAnimation AccelerationRatio="1.0"
+                                 SpeedRatio="2.5"
+                                 Storyboard.TargetProperty="Opacity"
+                                 To="1.0" />
+            </Storyboard>
+        </ControlTemplate.Resources>
+    </ControlTemplate>
+
+    <Style TargetType="{x:Type Controls:FlipViewEX}">
+        <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+        <Setter Property="FontSize" Value="16" />
+        <Setter Property="MinHeight" Value="100" />
+        <Setter Property="MinWidth" Value="100" />
+        <Setter Property="Selector.IsSynchronizedWithCurrentItem" Value="True" />
+        <Setter Property="Template" Value="{StaticResource FlipViewTemplate}" />
+    </Style>
+</ResourceDictionary>
